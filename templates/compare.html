@@ -32,7 +32,7 @@
             </div>
             <div class="col-xs-4">
                 <h1><strong><a href="{% url 'cardetailshow' slug=car2.slug %}">{{car2.detailcarname}}</a></strong></h1><br><hr>
-                <div style="width: 330px;height:230px"><img style="max-width: 300px;max-height:200px;" src="{{car2.photo1}}" alt="notfound"></div>
+                <div style="width: 330px;height:230px"><img style="max-width: 300px;max-height:200px;" src="{{car2.photo1.url}}" alt="notfound"></div>
                 Rs.{{car2.carprice|intcomma}}<br><hr>
                 {{car2.compuser}}<br><hr>
                 {{car2.engine}} cc <br><hr>
