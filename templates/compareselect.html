@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block content %}
+  </div>
+  <style>
+    select{
+      width:200px;
+      height: 30px;
+      background-color:lightyellow;
+    }
+  </style>
+  <div style="height: 100vh;width:100vw;position:relative; background:linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.7)), url(/media/compare.jpg);background-size:90%;">
+    <div class="container" style="color: white;padding-top:20vh;font-size:1.2em">
+      <form action="{% url 'compare' %}" style="margin-bottom: 0px;padding:20px;border:solid black 2px;border-radius:10px;background-color:rgba(255, 255, 255, 0.164)">{% csrf_token %}
+        <div class="row">
+            <div class="col">
+              <label for="brand1dropdown">Choose Car Brand:</label>
+                <select id="brand1dropdown" name="brand1dropdown" style="margin:10px;" onchange="companyfirst(value)">
+                  <option value="" disabled selected>Select Car Brand</option>
+                    {% for brand in cars|dictsort:'compuser' %}
+                      {% ifchanged %}
+                      <option id="{{brand.companyslug}}" value="{{brand.companyslug}}">{{brand.compuser}}</option>
+                      {% endifchanged %}
+                    {% endfor %} 
+                </select><br>
+                <label for="car1dropdown">Choose a car: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <select  id='car1dropdown' name='car1dropdown' style="margin:10px;">
+                <option value="" disabled selected>Select Car</option>
+                </select>
+            </div>
+            <div class="col">
+              <label for="brand2dropdown">Choose Car Brand:</label>
+              <select id="brand2dropdown" name="brand2dropdown" style="margin:10px;" onchange="companysecond(value)">
+                <option value="" disabled selected>Select Car Brand</option>
+                  {% for brand in cars|dictsort:'compuser' %}
+                    {% ifchanged %}
+                    <option id="{{brand.companyslug}}" value="{{brand.companyslug}}">{{brand.compuser}}</option>
+                    {% endifchanged %}
+                  {% endfor %}
+              </select><br>
+                <label for="car2dropdown">Choose a car:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <select  id='car2dropdown' name='car2dropdown' style="margin:10px;">
+                  <option value="" disabled selected>Select Car</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn btn-success" style="border-radius:25px;position:relative;left:45%;" type="submit"> Compare </button>
+      </form>
+    </div>
+  </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+    <script type="text/javascript">
+        function companyfirst(slugval){
+            var car=slugval
+            event.preventDefault()
+            csrf_token = $.cookie('csrftoken');
+            $.ajax({
+                type: "POST",
+                url: "{% url 'carbybrandfilter' %}",
+                beforeSend: function(xhr, settings) {
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+                },
+                data: {
+                    'slug':car,
+                },
+                success: function (result) {
+                    var car1val=result.split(" ");
+                    car1val.forEach((c)=>{
+                        $("#car1dropdown").append('<option value="'+c+'">'+c+'</option>')
+                    })
+                    console.log("sucesssss")
+                },
+                error:function(result) {
+                console.log("error")
+                }
+            });
+        }
+        function companysecond(slugval){
+            var car=slugval
+            event.preventDefault()
+            csrf_token = $.cookie('csrftoken');
+            $.ajax({
+                type: "POST",
+                url: "{% url 'carbybrandfilter' %}",
+                beforeSend: function(xhr, settings) {
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+                },
+                data: {
+                    'slug':car,
+                },
+                success: function (result) {
+                    var car1val=result.split(" ");
+                    car1val.forEach((c)=>{
+                        $("#car2dropdown").append('<option value="'+c+'">'+c+'</option>')
+                    })
+                    console.log("sucesssss")
+                },
+                error:function(result) {
+                console.log("error")
+                }
+            });
+        }
+        
+    </script>
+{% endblock %}

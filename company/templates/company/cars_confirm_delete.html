@@ -1,0 +1,8 @@
+{% extends 'company/base.html' %}
+{% block content %}
+    <form method="POST" style="padding: 20px;">
+        {% csrf_token %}
+        <h3>Are you sure you want to delete "{{cars.carname}}"</h3>
+        <input type="submit" class='btn btn-danger' value="Confirm">
+    </form>
+{% endblock %}

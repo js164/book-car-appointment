@@ -1,0 +1,46 @@
+</div>
+    {% load humanize %}
+    <div class="row">
+      <div class="col-sm">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" style="height:800px; width:1000px; margin:50px;">
+        <div class="carousel-inner">
+          <div class="carousel-item active" >
+            <img class="d-block w-100" style="max-height:800px; max-width:1000px" src="{{cardetails.photo1.url}}" alt="Image Not Available">
+          </div>
+          <div class="carousel-item scrollimg">
+            <img class="d-block w-100" style="max-height:800px; max-width:1000px" src="{{cardetails.photo2.url}}" alt="Image Not Available">
+          </div>
+          <div class="carousel-item scrollimg">
+            <img class="d-block w-100" style="max-height:800px; max-width:1000px" src="{{cardetails.photo3,url}}" alt="Image Not Available">
+          </div>
+        </div>
+        </div>
+      </div>
+    
+      <div class="col-sm" style="margin: 50px;">
+        <div class="detailshow">
+          <h1><strong>{{cardetails.detailcarname}}</strong></h1><br><br>
+          <h5>
+            Car Price: Rs.{{cardetails.carprice|intcomma}}<br><hr>
+            Car Company: {{cardetails.compuser}}<br><hr>
+            Engine: {{cardetails.engine}} cc <br><hr>
+            Milege: {{cardetails.milege}} km <br><hr>
+            Seating Capacity: {{cardetails.seating}} <br><hr>
+            Fuel Type: {{cardetails.fuel}} <br><hr>
+            Transmission: {{cardetails.transmission}} <br><hr>
+            Airbags: {{cardetails.airbags}}<hr>
+          {% if user.is_authenticated and cardetails.compuser == user.username %}
+            </h5><button type="button" onclick="window.location.href='{% url 'company:deletecar' slug=cardetails.slug %}'" class="btn btn-primary btn-lg">
+              <span class='glyphicon glyphicon-ok-circle'></span>
+              Delete Car</button>
+            </h5><button type="button" onclick="window.location.href='{% url 'company:updatecar' slug=cardetails.slug %}'" class="btn btn-primary btn-lg">
+              <span class='glyphicon glyphicon-ok-circle'></span>
+              Update Car</button>
+          {% else %}
+            </h5><button type="button" onclick="window.location.href='{% url 'customer:booktestdrive' slug=cardetails.slug %}'" class="btn btn-primary btn-lg">
+              <span class='glyphicon glyphicon-ok-circle'></span>
+              Book Test Drive</button>
+         {% endif %}
+        </div>
+      </div>
+    </div>

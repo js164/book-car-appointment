@@ -1,0 +1,18 @@
+{% extends 'customer/base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+  <h1>Book Appointment</h1>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button type="submit" class='btn btn-primary' >Book</button>
+  </form><br>
+  <div class="jumbotron">
+    <h2>Show Room Details</h2><br>
+    <h5>
+      Show Room Name: {{showroomname}}<br>
+      Contact: {{contact}}<br>
+      Address: {{address}}<br>
+    </h5>
+  </div>
+{% endblock %}

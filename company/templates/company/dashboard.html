@@ -1,0 +1,17 @@
+{% extends 'company/base.html' %}
+{% block content %}
+<div class="container"><br>
+  <h1><strong>Welcome {{username}}</strong></h1>
+</div><hr>
+<div class="jumbotron">
+  <a href="{% url 'cars' %}">
+  <h3>Your Total Cars: {{totalcars}}</h3></a>
+</div>
+<div class="jumbotron">
+  <a href="{% url 'company:appointments' %}">
+  <h3>Upcoming Appointments: {{upcomingappointments}}</h3>
+  <h3>Total Appointments: {{totalappointments}}</h3></a>
+</div>
+<a href="{% url 'company:addcar' %}">
+<button type="submit" class="btn btn-primary" name="button">Add New Car</button></a>
+{% endblock %}

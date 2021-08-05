@@ -1,0 +1,47 @@
+{% extends 'customer/base.html' %}
+{% load humanize %}
+{% block content %}
+    <div class="container" style="background-color:ghostwhite;">
+        <div class="row" style="padding: 20px;font-size:1.5em"> 
+            <div class="col-xs-4">
+                <strong>
+                <h1>Car</h1><br><hr>
+                <div style="width: 330px;height:230px"></div>
+                Car Price: <br><hr>
+                Car Company:<br><hr>
+                Engine:<br><hr>
+                Milege:<br><hr>
+                Seating Capacity:<br><hr>
+                Fuel Type:<br><hr>
+                Transmission:<br><hr>
+                Airbags:<br><hr>
+            </strong>
+            </div>
+            <div class="col-xs-4">
+                <h1><strong><a href="{% url 'cardetailshow' slug=car1.slug %}">{{car1.detailcarname}}</a></strong></h1><br><hr>
+                <div style="width: 330px;height:230px"><img style="max-width: 300px;max-height:200px;" src="{{car1.photo1.url}}" alt="notfound"></div>
+                Rs.{{car1.carprice|intcomma}}<br><hr>
+                {{car1.compuser}}<br><hr>
+                {{car1.engine}} cc <br><hr>
+                {{car1.milege}} km <br><hr>
+                {{car1.seating}} <br><hr>
+                {{car1.fuel}} <br><hr>
+                {{car1.transmission}}<br><hr> 
+                {{car1.airbags}}<br><hr>
+                </td>
+            </div>
+            <div class="col-xs-4">
+                <h1><strong><a href="{% url 'cardetailshow' slug=car2.slug %}">{{car2.detailcarname}}</a></strong></h1><br><hr>
+                <div style="width: 330px;height:230px"><img style="max-width: 300px;max-height:200px;" src="{{car2.photo1}}" alt="notfound"></div>
+                Rs.{{car2.carprice|intcomma}}<br><hr>
+                {{car2.compuser}}<br><hr>
+                {{car2.engine}} cc <br><hr>
+                {{car2.milege}} km <br><hr>
+                {{car2.seating}} <br><hr>
+                {{car2.fuel}} <br><hr>
+                {{car2.transmission}}<br><hr> 
+                {{car2.airbags}}<br><hr>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,54 @@
+<div class="container">
+  {% load humanize %}
+  <div>
+    <h1 style="float:left;">Cars</h1>
+    {% if messages %}
+      <div style="clear: left;"></div>
+      <h3>{{ messages|linebreaks }}</h3>
+    {% else %}
+      <div class="dropdown" style="float:right;margin:10px;">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Brand
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          {% for brand in object_list|dictsort:'compuser' %}
+          {% ifchanged %}
+          <a class="dropdown-item" href="{% url 'carbybrand' slug=brand.compuser %}">{{brand.compuser}}</a>
+          {% endifchanged %}
+          {% endfor %}
+        </div>
+      </div>
+      <div class="dropdown" style="float:right;margin:10px;">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Price
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'customer:lowtohigh' %}">Low To Height</a>
+          <a class="dropdown-item" href="{% url 'customer:hightolow' %}">Height To Low</a>
+        </div>
+      </div>
+      <br>
+    {% endif %}
+  </div>
+  <div style="display: block;clear:both"></div>
+  {% for car in object_list %}
+      <div class="box jumbotron">
+        <div class="row">
+           <div class="col-lg-7 col-sm-12">
+             <a href="{% url 'cardetailshow' slug=car.slug %}">
+               <h3 class='title'>{{car.carname}}</h3>
+             </a>
+               <div class="container-fluid">
+                 Car Price: Rs.{{car.carprice|intcomma }}<br>
+                 Car Company: {{car.compuser}}<br>
+                 Engine: {{car.engine}} cc <br>
+               </div>
+             </div>
+             <!-- <div class="col"></div> -->
+             <div class="col-lg-5 col-sm-12">
+               <img class='mainimg' src="{{car.photo.url}}" width=350px;>
+             </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>

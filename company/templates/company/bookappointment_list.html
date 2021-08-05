@@ -1,0 +1,53 @@
+{% extends 'company/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+  <h1>Appointments</h1><hr>
+  {% for group_for in request.user.groups.all %}
+    {% if group_for.name == 'company' %}
+    {% if upcomingappointments > 0  %}
+      <h3>Uplcoming Appointments</h3>
+    {% else %}
+      <h3>No Upcoming Appointments</h3>
+    {% endif %}
+      {% for appointment in object_list %}
+      {% now "Y-m-d" as todays_date %}
+      {% with appointment.date|date:"Y-m-d" as appodate %}
+        {% if appodate >= todays_date %}
+          <div class="jumbotron">
+            Customer Name: {{appointment.name}}<br>
+            Customer Email: {{appointment.email}}<br>
+            Customer Contact: {{appointment.contact}}<br>
+            Car: {{appointment.appointmnetcarname}}<br>
+            Date: {{appointment.date|date:"M d, Y"}}<br>
+          </div>
+        {% endif %}
+      {% endwith %}
+      {% endfor %}<hr><hr>
+      {% if pastappointments > 0  %}
+      <h3>Past Appointments</h3>
+      {% else %}
+      <h3>No Past Appointments</h3>
+      {% endif %}
+      {% for appointment in object_list reversed %}
+      {% now "Y-m-d" as todays_date %}
+      {% with appointment.date|date:"Y-m-d" as appodate %}
+        {% if appodate < todays_date %}
+          <div class="jumbotron">
+            Customer Name: {{appointment.name}}<br>
+            Customer Email: {{appointment.email}}<br>
+            Customer Contact: {{appointment.contact}}<br>
+            Car: {{appointment.appointmnetcarname}}<br>
+            Date: {{appointment.date|date:"M d, Y"}}<br>
+          </div>
+        {% endif %}
+      {% endwith %}
+      {% endfor %}
+    {% else %}
+        You are not authoried!
+    {% endif %}
+  {%endfor%}
+  </div>
+</div>
+
+{% endblock %}
