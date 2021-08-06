@@ -66,6 +66,7 @@
                 },
                 success: function (result) {
                     var car1val=result.split(" ");
+                    $("#car1dropdown option").remove()
                     car1val.forEach((c)=>{
                         $("#car1dropdown").append('<option value="'+c+'">'+c+'</option>')
                     })
@@ -91,6 +92,7 @@
                 },
                 success: function (result) {
                     var car1val=result.split(" ");
+                    $("#car2dropdown option").remove()
                     car1val.forEach((c)=>{
                         $("#car2dropdown").append('<option value="'+c+'">'+c+'</option>')
                     })
