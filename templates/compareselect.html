@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col">
               <label for="brand1dropdown">Choose Car Brand:</label>
-                <select id="brand1dropdown" name="brand1dropdown" style="margin:10px;" onchange="companyfirst(value)">
+                <select id="brand1dropdown" name="brand1dropdown" style="margin:10px;" onchange="companyfirst(value)" required>
                   <option value="" disabled selected>Select Car Brand</option>
                     {% for brand in cars|dictsort:'compuser' %}
                       {% ifchanged %}
@@ -29,7 +29,7 @@
             </div>
             <div class="col">
               <label for="brand2dropdown">Choose Car Brand:</label>
-              <select id="brand2dropdown" name="brand2dropdown" style="margin:10px;" onchange="companysecond(value)">
+              <select id="brand2dropdown" name="brand2dropdown" style="margin:10px;" onchange="companysecond(value)" required>
                 <option value="" disabled selected>Select Car Brand</option>
                   {% for brand in cars|dictsort:'compuser' %}
                     {% ifchanged %}
